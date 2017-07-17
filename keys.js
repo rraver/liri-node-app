@@ -1,8 +1,8 @@
 exports.twitterKeys = {
-  consumer_key: '<input here>',
-  consumer_secret: '<input here>',
-  access_token_key: '<input here>',
-  access_token_secret: '<input here>',
+  consumer_key: 'WxwxeehTB0OPb8UuFeYw7bvEE',
+  consumer_secret: 'Upmm7jsAxXzppB8IjVabN3xyu2pKwtaQne8uoc6e34vxonMWbr',
+  access_token_key: '881210725313773568-fm8RFR2cR6NihhkJvFNv21lCyZUuiA9',
+  access_token_secret: 'dYqWj2rJROWpAvJkHCoWOzjGBWmQJGBq56vayd2V3aACx',
 }
 
 exports.spotifyKeys = {

@@ -9,11 +9,23 @@ var spotify = new spotifyPackage({
   secret: keys.spotifyKeys.clientSecret
 });
 var twitter = require('twitter');
-
+var twitterclient = new twitter({
+  consumer_key: keys.twitterKeys.consumer_key,
+  consumer_secret: keys.twitterKeys.consumer_secret,
+  access_token_key: keys.twitterKeys.access_token_key,
+  access_token_secret: keys.twitterKeys.access_token_secret
+});
 
 switch (method) {
   case "my-tweets":
-    console.log("twitter API");
+    twitterclient.get('statuses/user_timeline', function(error, tweets, response) {
+      tweets.forEach(function(infoTweet){
+        console.log();
+        console.log("Tweet: " + infoTweet.text);
+        console.log("Tweeted on: " + infoTweet.created_at)
+      })
+      console.log(error);
+    });
     break;
   case "spotify-this-song":
     if (value == undefined) {
@@ -26,9 +38,15 @@ switch (method) {
       value = "Mr. Nobody."
     }
     request("http://www.omdbapi.com/?apikey=" + keys.omdbKeys.key + "&t=" + value, function(error, response, body) {
-      console.log(body);
+      var results = JSON.parse(body);
+      console.log("Title of the movie: " + results.Title)
+      console.log("Year the movie came out: " + results.Year)
+      console.log("IMDB rating of the move: " + results.imdbRating)
+      console.log("Country where the movie was produced: " + results.Country)
+      console.log("Language of the movie: " + results.Language)
+      console.log("Plot of the movie:" + results.Plot)
+      console.log("Actors in the movie: " + results.Actors);
       });
-    console.log("test");
     break;
   case "do-what-it-says":
     fs.readFile('./random.txt', 'utf8', function read(err, data) {
@@ -54,9 +72,3 @@ function spotifyAction() {
   console.log("The album the song is from is: " + results.tracks.items[0].album.name);
   });
 }
-
-// request('http://www.google.com', function (error, response, body) {
-//   console.log('error:', error); // Print the error if one occurred
-//   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//   console.log('body:', body); // Print the HTML for the Google homepage.
-// });
