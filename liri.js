@@ -1,13 +1,18 @@
-var method = process.argv[2];
-var value = process.argv[3];
+// In general, required modules go first at the top of the file
+// since anything below is bound to depend on them
 var keys = require('./keys.js');
 var request = require('request');
 var fs = require('fs');
+
+var method = process.argv[2];
+var value = process.argv[3];
+
 var spotifyPackage = require('node-spotify-api');
 var spotify = new spotifyPackage({
   id: keys.spotifyKeys.clientID,
   secret: keys.spotifyKeys.clientSecret
 });
+
 var twitter = require('twitter');
 var twitterclient = new twitter({
   consumer_key: keys.twitterKeys.consumer_key,
